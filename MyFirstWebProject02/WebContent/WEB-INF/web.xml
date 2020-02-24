@@ -4,8 +4,16 @@
 		<servlet-name>HelloServletDoGet</servlet-name>
 		<servlet-class>HelloServletDoGet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>GetDataServlet</servlet-name>
+		<servlet-class>GetDataServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>HelloServletDoGet</servlet-name>
 		<url-pattern>/HelloServletDoGet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>GetDataServlet</servlet-name>
+		<url-pattern>/GetDataServlet</url-pattern>
 	</servlet-mapping>
 </web-app>
