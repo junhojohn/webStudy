@@ -8,6 +8,14 @@
 		<servlet-name>GetDataServlet</servlet-name>
 		<servlet-class>GetDataServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>HelloServletDoPost</servlet-name>
+		<servlet-class>HelloServletDoPost</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>PostDataServlet</servlet-name>
+		<servlet-class>PostDataServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>HelloServletDoGet</servlet-name>
 		<url-pattern>/HelloServletDoGet</url-pattern>
@@ -15,5 +23,13 @@
 	<servlet-mapping>
 		<servlet-name>GetDataServlet</servlet-name>
 		<url-pattern>/GetDataServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>HelloServletDoPost</servlet-name>
+		<url-pattern>/HelloServletDoPost</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>PostDataServlet</servlet-name>
+		<url-pattern>/PostDataServlet</url-pattern>
 	</servlet-mapping>
 </web-app>
