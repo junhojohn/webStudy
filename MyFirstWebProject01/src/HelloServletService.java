@@ -10,44 +10,33 @@ import javax.servlet.http.HttpServletResponse;
 
 public class HelloServletService extends HttpServlet {
 
-	//init() => method overriding ÇÏÁö ¾ÊÀ½
-	
-	/**
-	 * À¥ºê¶ó¿ìÀú¿¡¼­ http://localhost:8080/MyFirstWebProject01/HelloServletService·Î urlÁ¢¼ÓÇÒ ¶§ service()¸Ş¼Òµå ½ÇÇà
-	 */
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		
 		System.out.println("1. servlet service() start");
 		System.out.println("Client IP: " + req.getRemoteAddr());
-		
-		// ¾Æ·¡ÀÇ µÎ ½ÇÇà¹®À» º¯°æÇÏ¿© ½ÇÇà:: ÇÑ±Û Ã³¸®
+		// ì•„ë˜ì˜ ë‘ ì‹¤í–‰ë¬¸ì„ ë³€ê²½í•˜ì—¬ ì‹¤í–‰:: í•œê¸€ ì²˜ë¦¬
 		//res.setContentType("text/html");
 		res.setContentType("text/html;charset=EUC_KR");
-		
-		// Client·Î º¸³»´Â StreamÀ» »ı¼º(1¹øÂ° ¹æ¹ı)
+		// Clientë¡œ ë³´ë‚´ëŠ” Streamì„ ìƒì„±(1ë²ˆì§¸ ë°©ë²•)
 		/*
 		ServletOutputStream sos = res.getOutputStream();
 		OutputStreamWriter osw = new OutputStreamWriter(sos);
 		PrintWriter out = new PrintWriter(osw);
 		*/
-		
-		// HttpServletResponse API¸¦ È®ÀÎÇÏ¸é...(2¹øÂ° ¹æ¹ı:: ÀÏ¹İÀûÀÎ ¹æ¹ı)
+		// HttpServletResponse APIë¥¼ í™•ì¸í•˜ë©´...(2ë²ˆì§¸ ë°©ë²•:: ì¼ë°˜ì ì¸ ë°©ë²•)
 		PrintWriter out = res.getWriter();
 		out.println("<html>");
 		out.println("<head><title>Hello Servlet</title></head>");
 		out.println("<body>");
 		out.println("English: Hello Servlet");
 		out.println("<p>");
-		out.println("Korean: Çï·Î ¼­ºí¸´");
+		out.println("Korean: í—¬ë¡œ ì„œë¸”ë¦¿");
 		out.println("</body>");
 		out.println("</html>");
 		out.flush();
 		out.close();
-		
 		System.out.println("2. servlet service() stop");
 	}
-	
-	//destroy() ==> method overriding ÇÏÁö ¾ÊÀ½
+	//destroy() ==> method overriding í•˜ì§€ ì•ŠìŒ
 
 }// end of class

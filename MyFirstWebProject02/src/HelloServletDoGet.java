@@ -8,37 +8,31 @@ import javax.servlet.http.HttpServletResponse;
 
 public class HelloServletDoGet extends HttpServlet {
 
-	//init() ==> method ¿À¹ö¶óÀÌµù ÇÏÁö ¾ÊÀ½
-	
+	//init() ==> method ì˜¤ë²„ë¼ì´ë”© í•˜ì§€ ì•ŠìŒ
 	/**
-	 * doGet() ==> method ¿À¹ö¶óÀÌµù
-	 * http://127.0.0.1:8080/MyFirstWebProject02/HelloServletDoGetÀ¸·Î Á¢¼ÓÇÏ¸é doGet() ¸Ş¼Òµå°¡ ¸Ş½ÃÂ¡µÈ´Ù.
+	 * doGet() ==> method ì˜¤ë²„ë¼ì´ë”©
+	 * 
 	 */
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		
 		System.out.println("1. Servlet doGet() start");
 		System.out.println("Clietn IP:" + req.getRemoteAddr());
-		
-		// character set ÇÑ±Û ¼³Á¤
+		// character set í•œê¸€ ì„¤ì •
 		res.setContentType("text/html;charset=EUC_KR");
-		
-		// HttpServletResponse API¸¦ È®ÀÎÇÏ¸é...(2¹øÂ° ¹æ¹ı:: ÀÏ¹İÀûÀÎ ¹æ¹ı)
+		// HttpServletResponse APIë¥¼ í™•ì¸í•˜ë©´...(2ë²ˆì§¸ ë°©ë²•:: ì¼ë°˜ì ì¸ ë°©ë²•)
 		PrintWriter out = res.getWriter();
 		out.println("<html>");
 		out.println("<head><title>Hello Servlet</title></head>");
 		out.println("<body>");
 		out.println("English: Hello Servlet");
 		out.println("<p>");
-		out.println("Korean: Çï·Î ¼­ºí¸´");
+		out.println("Korean: í—¬ë¡œ ì„œë¸”ë¦¿");
 		out.println("</body>");
 		out.println("</html>");
 		out.flush();
 		out.close();
-		
 		System.out.println("2. Servlet doGet() stop");
 	}
-	
-	//destroy() ==> method ¿À¹ö¶óÀÌµù ÇÏÁö ¾ÊÀ½
+	//destroy() ==> method ì˜¤ë²„ë¼ì´ë”© í•˜ì§€ ì•ŠìŒ
 
 } // end of class

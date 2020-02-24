@@ -8,40 +8,35 @@ import javax.servlet.http.HttpServletResponse;
 
 public class GetDataServlet extends HttpServlet {
 	
-	//init() ==> method ¿À¹ö¶óÀÌµù ÇÏÁö ¾ÊÀ½
+	//init() ==> method ì˜¤ë²„ë¼ì´ë”© í•˜ì§€ ì•ŠìŒ
 	
 	/**
-	 * doGet() ==> method ¿À¹ö¶óÀÌµù
-	 * http://127.0.0.1:8080/MyFirstWebProject02/GetDataServlet?name=junhojohn&addr=Seoul',À¸·Î Á¢¼ÓÇÏ¸é doGet() ¸Ş¼Òµå°¡ ¸Ş½ÃÂ¡µÈ´Ù.
+	 * doGet() ==> method ì˜¤ë²„ë¼ì´ë”©
+	 * http://127.0.0.1:8080/MyFirstWebProject02/GetDataServlet?name=junhojohn&addr=Seoul'ìœ¼ë¡œ ì ‘ì†í•˜ë©´ doGet() ë©”ì†Œë“œê°€ ë©”ì‹œì§•ëœë‹¤.
 	 */
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		
-		// Client¿¡¼­ Àü¼ÛµÇ¾î ¿À´Â data(QueryString:: name=value, addr=value)Ã³¸® (API È®ÀÎ)
+		// Clientì—ì„œ ì „ì†¡ë˜ì–´ ì˜¤ëŠ” data(QueryString:: name=value, addr=value)ì²˜ë¦¬ (API í™•ì¸)
 		String clientName = req.getParameter("name");
 		String clientAddr = req.getParameter("addr");
 
-		// Client·ÎºÎÅÍ ¹ŞÀº Data¸¦ Ãâ·Â
-		System.out.println("clientName:" + clientName);
-		System.out.println("clientAddr:" + clientAddr);
-		
-		// ¾Æ·¡ ½ÇÇà¹®Àº servlet¿¡¼­ client·Î ÀÀ´ä html Àü¼Û ½Ã ¹®ÀÚ¼ÂÀ» ¼³Á¤ÇÏ´Â ºÎºĞ
-		res.setContentType("text/html;charset=EUC_KR");
-		
-		// HttpServletResponse API¸¦ È®ÀÎÇÏ¸é...(2¹øÂ° ¹æ¹ı:: ÀÏ¹İÀûÀÎ ¹æ¹ı)
-		PrintWriter out = res.getWriter();
-		out.println("<html>");
-		out.println("<head><title>GetData.java</title></head>");
-		out.println("<body>");
-		out.println("<h2>Get Test</h2>");
-		out.println("<li>ÀÌ¸§:" + clientName);
-		out.println("<li>ÁÖ¼Ò:" + clientAddr);
-		out.println("<p><p><a href='/MyFirstWebProject02/GetDataServlet'>µÚ·Î</a>");
-		out.println("</body>");
-		out.println("</html>");
-		
+	// Clientë¡œë¶€í„° ë°›ì€ Dataë¥¼ ì¶œë ¥
+	System.out.println("clientName:" + clientName);
+	System.out.println("clientAddr:" + clientAddr);
+	// ì•„ë˜ ì‹¤í–‰ë¬¸ì€ servletì—ì„œ clientë¡œ ì‘ë‹µ html ì „ì†¡ ì‹œ ë¬¸ìì…‹ì„ ì„¤ì •í•˜ëŠ” ë¶€ë¶„
+	res.setContentType("text/html;charset=EUC_KR");
+	// HttpServletResponse APIë¥¼ í™•ì¸í•˜ë©´...(2ë²ˆì§¸ ë°©ë²•:: ì¼ë°˜ì ì¸ ë°©ë²•)
+	PrintWriter out = res.getWriter();
+	out.println("<html>");
+	out.println("<head><title>GetData.java</title></head>");
+	out.println("<body>");
+	out.println("<h2>Get Test</h2>");
+	out.println("<li>ì´ë¦„:" + clientName);
+	out.println("<li>ì£¼ì†Œ:" + clientAddr);
+	out.println("<p><p><a href='/MyFirstWebProject02/GetDataServlet'>ë’¤ë¡œ</a>");
+	out.println("</body>");
+	out.println("</html>");
 	}
-	
-	//destroy() ==> method ¿À¹ö¶óÀÌµù ÇÏÁö ¾ÊÀ½
+	//destroy() ==> method ì˜¤ë²„ë¼ì´ë”© í•˜ì§€ ì•ŠìŒ
 
 } // end of class
