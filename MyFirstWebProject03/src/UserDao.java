@@ -5,9 +5,9 @@ import java.sql.ResultSet;
 
 public class UserDao {
 
-	String dbUrl 		= "jdbc:oracle:thin:@127.0.0.1:1521:xe";
-	String dbuser 		= "scott";
-	String dbpwd 		= "tiger";
+	String dbUrl 		= "jdbc:oracle:thin:@127.0.0.1:1521:junhojohn";
+	String dbuser 		= "SYSTEM";
+	String dbpwd 		= "Wnsgh3535";
 	String driverName 	= "oracle.jdbc.driver.OracleDriver";
 	
 	public UserDao() {
