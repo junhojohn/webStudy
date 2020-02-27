@@ -34,7 +34,7 @@ public class UserDao {
 			//Step3: resultset
 			rs = pStmt.executeQuery();
 			if(rs.next()) {
-				System.out.println("db id, pwd ==>" + userVO.getId() + ":" + userVO.getPwd());
+				System.out.println("db id, pwd ==>" + rs.getString(1) + ":" + rs.getString(2));
 				userVO.setActive(true);
 			}else {
 				System.out.println("not existing data : " + userVO.getId());
