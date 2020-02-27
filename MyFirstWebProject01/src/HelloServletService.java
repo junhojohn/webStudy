@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 
 public class HelloServletService extends HttpServlet {
 
+	/**
+	 * service() ==> method 오버라이딩
+	 * http://127.0.0.1:8080/MyFirstWebProject01으로 접속하면 service() 메소드가 메시징된다.
+	 */
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		System.out.println("1. servlet service() start");
