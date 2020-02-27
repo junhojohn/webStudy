@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 
 public class PostDataServlet extends HttpServlet {
 
+	/**
+	 * doPost() ==> method 오버라이딩
+	 * http://127.0.0.1:8080/MyFirstWebProject02/PostDataServlet.html으로 접속 => click "전송" 하면 doPost() 메소드가 메시징된다.
+	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		
