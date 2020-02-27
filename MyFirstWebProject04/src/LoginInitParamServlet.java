@@ -41,6 +41,7 @@ public class LoginInitParamServlet extends HttpServlet {
 	}
 	
 	//doPost() method overriding
+	//http://127.0.0.1:8080/MyFirstWebProject04/LoginInitParamServlet.html => click "send"
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		System.out.println("1. Servlet doPost() start");
