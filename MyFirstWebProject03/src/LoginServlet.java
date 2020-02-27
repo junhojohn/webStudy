@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class LoginServlet extends HttpServlet {
 
-	
+	//http://127.0.0.1:8080/MyFirstWebProject03/LoginServlet.html => click "send"
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		
