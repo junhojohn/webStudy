@@ -11,7 +11,7 @@ public class HelloServletDoGet extends HttpServlet {
 	//init() ==> method 오버라이딩 하지 않음
 	/**
 	 * doGet() ==> method 오버라이딩
-	 * 
+	 * http://127.0.0.1:8080/MyFirstWebProject02/HelloServletDoGet'으로 접속하면 doGet() 메소드가 메시징된다.
 	 */
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
