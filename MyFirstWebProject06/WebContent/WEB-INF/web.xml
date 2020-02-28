@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+	<servlet>
+		<servlet-name>CookieWriterToClientServlet</servlet-name>
+		<servlet-class>CookieWriterToClientServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>CookieReaderToServerServlet</servlet-name>
+		<servlet-class>CookieReaderToServerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CookieWriterToClientServlet</servlet-name>
+		<url-pattern>/CookieWriterToClientServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CookieReaderToServerServlet</servlet-name>
+		<url-pattern>/CookieReaderToServerServlet</url-pattern>
+	</servlet-mapping>
+</web-app>
