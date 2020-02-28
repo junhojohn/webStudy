@@ -45,6 +45,6 @@ public class LoginPoolDataSourceServlet extends HttpServlet {
 		out.println("</body>");
 		out.println("</html>");
 		
-		System.out.println("2. Servlet doGet() stop");
+		System.out.println("2. Servlet doPost() stop");
 	}
 }
