@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+												 http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+												 
+	<bean id="lifecycle01" class="spring.service.lifecycle.LifeCycle01" depends-on="lifecycle02, lifecycle03" init-method="init" destroy-method="destroy" scope="singleton"/>
+	
+	<bean id="lifecycle02" class="spring.service.lifecycle.LifeCycle01"/>
+	<bean id="lifecycle03" class="spring.service.lifecycle.LifeCycle01" scope="prototype"/>
+	
+	<bean id="lifecycle04" class="spring.service.lifecycle.LifeCycle01" scope="prototype"/>
+</beans>
