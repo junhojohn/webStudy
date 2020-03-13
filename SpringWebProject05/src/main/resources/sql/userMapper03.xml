@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- userMapper03.xml :: SQL을 갖는 Meta Data -->
+<mapper namespace="userMapper03">
+
+	<!-- INSERT 매핑구문(INSERT SQL 등록) :: INSERT ELEMENT -->
+	<insert id="insertUser" parameterType="user">
+	INSERT 
+	INTO USERS(USER_ID,USER_NAME,PASSWORD,AGE,GRADE,REG_DATE)
+	VALUES(#{id},#{name},#{pwd},#{age},#{grade},SYSDATE)
+	</insert>
+	
+	<!-- SELECT 매핑구문(SELECT SQL 등록) :: SELECT ELEMENT -->
+	<select id="selectUserList" resultType="user">
+	SELECT 
+	USER_ID		AS id,
+	USER_NAME	AS name,
+	PASSWORD	AS pwd,
+	AGE			AS age,
+	GRADE		AS grade,
+	REG_DATE	AS regDate
+	 FROM USERS
+	</select>
+	
+	<!-- UPDATE 매핑구문(UPDATE SQL 등록) :: UPDATE ELEMENT -->
+	<update id="updateUser" parameterType="user">
+	UPDATE USERS
+	SET 
+		USER_NAME 	= #{name},
+		PASSWORD 	= #{pwd},
+		AGE 		= #{age},
+		GRADE 		= #{grade}
+	WHERE
+		USER_ID 	= #{id}
+	</update>
+	
+	<!-- DELETE 매핑구문(DELETE SQL 등록) :: DELETE ELEMENT -->
+	<delete id="deleteUser" parameterType="user">
+	DELETE FROM USERS
+	WHERE USER_ID = #{id}
+	</delete>
+	
+</mapper>
