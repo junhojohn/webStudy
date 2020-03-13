@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+          PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+         "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!-- mybatis-config01.xml :: MyBatis Framework MetaData -->         
+<configuration>
+	
+	<!-- 
+	1. properties 파일 관리
+	   - 애플리케이션 배포시 공통부분, 각 환경 별 다른 값들은 properties 파일에
+	     독립적으로 관리할 수 있다.
+	   - DBMS 접속정보를 갖는 properties 파일 참조
+	   - properties 파일에 저장된 name = value 는 ${name} 표현으로 접근 가능
+	 -->
+	<properties resource="sql/jdbc.properties"/>
+	
+	<!-- 
+	2. 기타 설정정보 :: [MyBatis_Home]/mybatis-3.2.1.pdf 참조
+	3. SELECT 결과 column이 null인 경우 setter method 호출 유무 
+	 -->
+	 <!-- 
+	<settings>
+		<setting name="callSettersOnNulls" value="false"/>
+	</settings>	 
+	  -->
+	
+	<!-- 
+	3. FQCN(Fully Qualified Class Name) Alias(별칭관리)
+	   - MyBatis는 자주사용/공통된 Data Type은 내장된 Alias를 정의해두고 있다.
+	     - string : java.lang.String
+	     - byte   : java.lang.Byte :: + wrapper class 7개 포함(Character 제외)
+	     - Primitive Data Type : _byte 형태 7개 (char 제외)
+	     - object : java.lang.Object
+	     - map	  : java.util.Map
+	     - hashMap: java.util.HashMap
+	     - list   : java.util.List
+	     - arraylist: java.util.ArrayList 등
+	   - [MyBatis_Home]/mybatis-3.2.1.pdf 참조
+	 -->
+	<typeAliases>
+		<typeAlias alias="user" type="mybatis.service.domain.User"/>
+	</typeAliases>
+	
+	<!-- 
+	4. JDBC 설정
+	 -->
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC"/>
+			<!-- javax.sql.DataSource Definition -->
+			<dataSource type="POOLED">
+				<!-- properties 파일에 저장된 name = value 는 ${name} 표현으로 접근 가능  -->
+				<property name="driver" value="${driver}"/>
+				<property name="url" value="${url}"/>
+				<property name="username" value="${username}"/>
+				<property name="password" value="${password}"/>
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<!-- 
+	5. SQL Definition :: file include 방식
+	 -->
+	<mappers>
+		<mapper resource="sql/userMapper01.xml"/>
+	</mappers>
+	
+</configuration>
