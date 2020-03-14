@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- userMapper05.xml :: SQL을 갖는 MetaData -->
+<mapper namespace="userMapper05">
+
+	<!-- 
+	1. INSERT 매핑구문(INSERT SQL 등록) :: INSERT ELEMENT
+	   - Dynamic SQL 사용처리
+	 -->
+	<insert id="addUser" parameterType="user">
+	INSERT INTO 
+	USERS(USER_ID, USER_NAME, PASSWORD, AGE, GRADE, REG_DATE)
+	VALUES(
+		#{id},
+		#{name},
+		#{pwd},
+		#{age:INTEGER},
+		<if test="grade == 0">null</if>
+		<if test="grade != 0">#{grade}</if>,
+		#{regDate:DATE}
+	)	
+	</insert>
+	
+	<!-- 
+	2. SELECT 매핑구문(SELECT SQL 등록) :: SELECT ELEMENT
+	 -->
+	<select id="selectUser01" parameterType="string" resultType="user">
+	SELECT 
+	USER_ID		AS id,
+	USER_NAME	AS name,
+	PASSWORD	AS pwd,
+	AGE			AS age,
+	GRADE		AS grade,
+	REG_DATE	AS regDate
+	FROM USERS
+	WHERE USER_ID = #{id}
+	</select>
+
+	<!-- 명시적 결과 맵 사용 :: 명시적 선언을 통해 정확성, 인라인보다 성능 향상 -->
+	<!-- SELECT 매핑구문에서 사용할 ResultSet과 바인딩될 비즈니스 객체 명시적 정의 -->	
+	<resultMap type="user" id="userSelectMap">
+		<result property="id" column="USER_ID" jdbcType="VARCHAR"/><!-- VARCHAR2로 바꿔서 해볼것 -->
+		<result property="name" column="USER_NAME" jdbcType="VARCHAR"/>
+		<result property="pwd" column="PASSWORD" jdbcType="VARCHAR"/>
+		<result property="age" column="AGE" jdbcType="INTEGER"/>
+		<result property="grade" column="GRADE" jdbcType="NUMERIC"/>
+		<result property="regDate" column="REG_DATE" jdbcType="DATE"/>
+	</resultMap>
+	
+	<!-- 
+	3. SELECT 매핑구문(SELECT SQL 등록) :: SELECT ELEMENT 
+	   - ResultMap(외부 결과 맵) 사용 : Query 결과가 ResultMap 선언된 column/property 를 바인딩
+	 -->
+	<select id="selectUser02" parameterType="string" resultMap="userSelectMap">
+	SELECT 
+	USER_ID		AS id,
+	USER_NAME	AS name,
+	PASSWORD	AS pwd,
+	AGE			AS age,
+	GRADE		AS grade,
+	REG_DATE	AS regDate
+	FROM USERS
+	WHERE USER_ID = #{id}
+	</select>
+	
+	<!-- 
+	4. SELECT 매핑구문(SELECT SQL 등록) :: SELECT ELEMENT
+	 -->	
+	<select id="selectUserList" resultMap="userSelectMap">
+	SELECT
+	USER_ID		AS id,
+	USER_NAME	AS name,
+	PASSWORD	AS pwd,
+	AGE			AS age,
+	GRADE		AS grade,
+	REG_DATE	AS regDate
+	FROM USERS
+	</select>
+
+	<!-- 
+	5. DELETE 매핑구문(DELETE SQL 등록) :: DELETE ELEMENT
+	 -->	
+	<delete id="deleteUser" parameterType="string">
+	DELETE
+	FROM USERS
+	WHERE USER_ID = #{id}
+	</delete>
+	
+</mapper>  
