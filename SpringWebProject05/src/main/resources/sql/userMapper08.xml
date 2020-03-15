@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="userMapper08">
+
+	<!-- SELECT 매핑구문에서 사용할 ResultSet과 바인딩될 비즈니스 객체 명시적 정의 -->	
+	<resultMap type="mybatis.service.domain.User" id="userSelectMap">
+		<result property="id" column="USER_ID" jdbcType="VARCHAR"/>
+		<result property="name" column="USER_NAME" jdbcType="VARCHAR"/>
+		<result property="pwd" column="PASSWORD" jdbcType="VARCHAR"/>
+		<result property="age" column="AGE" jdbcType="INTEGER"/>
+		<result property="grade" column="GRADE" jdbcType="NUMERIC"/>
+		<result property="regDate" column="REG_DATE" jdbcType="DATE"/>
+	</resultMap>
+
+	<!-- 
+	SQL 을 컴포넌트(모듈화) 할 수 있는 SQL Include Element
+	 -->	
+	<sql id="select-users">
+	SELECT 
+	USER_ID		AS id,
+	USER_NAME	AS name,
+	PASSWORD	AS pwd,
+	AGE			AS age,
+	GRADE		AS grade,
+	REG_DATE	AS regDate
+	FROM USERS
+	</sql>
+
+	<!-- 
+	SQL 을 컴포넌트(모듈화) 할 수 있는 SQL Include Element
+	 -->		
+	<sql id="orderby-userId-desc">
+	ORDER BY USER_ID DESC
+	</sql>
+	
+	<!-- 
+	Dynamic SQL :: <where> element는 <trim> element로 변경 가능
+	 -->	
+	<select id="selectUser01" parameterType="user" resultMap="userSelectMap">
+		<include refid="select-users"/>
+		<where>
+			<if test="id != null">
+				USER_ID = #{id}
+			</if>
+			<if test="pwd != null">
+				AND PASSWORD = #{pwd}
+			</if>
+		</where>
+		<include refid="orderby-userId-desc"/>
+	</select>
+
+	<!-- 
+	Dynamic SQL :: <where> element는 <trim> element로 변경 가능
+	 -->	
+	<select id="selectUser02" parameterType="user" resultMap="userSelectMap">
+		<include refid="select-users"/>
+		<trim prefix="WHERE">
+			<!-- switch/case / default 와 비교 이해 -->
+			<choose>
+				<when test="id != null">
+					USER_ID = #{id}
+				</when>
+				<when test="pwd != null">
+					AND PASSWORD = #{pwd}
+				</when>
+				<otherwise>
+					AGE = #{age}
+				</otherwise>
+			</choose>
+		</trim>
+	</select>
+	
+	<select id="selectUserList01" resultMap="userSelectMap">
+		<include refid="select-users"/>
+		<include refid="orderby-userId-desc"/>
+	</select>
+	
+	<!-- 
+	Dynamic SQL :: <set> element 사용
+	 -->	
+	<update id="updateUser01" parameterType="user">
+	UPDATE USERS
+	<trim prefix="SET" suffixOverrides=",">
+		<if test="name != null">
+			USER_NAME = #{name},
+		</if>
+		<if test="pwd != null">
+			PASSWORD = #{pwd},
+		</if>
+		AGE = #{age},
+		GRADE = #{grade:DATE}
+	</trim>
+	<where>
+		USER_ID = #{id}
+	</where>
+	</update>
+
+	<!-- INSERT 매핑구문(INSERT SQL 등록) :: INSERT ELEMENT -->	
+	<insert id="insertUser01" parameterType="user">
+	INSERT INTO 
+	USERS(USER_ID, USER_NAME, PASSWORD, AGE, GRADE, REG_DATE)
+	VALUES(#{id}, #{name}, #{pwd}, #{age}, #{grade}, #{regDate:DATE})
+	</insert>
+	
+	<!-- DELETE 매핑구문(DELETE SQL 등록) :: DELETE ELEMENT -->
+	<delete id="deleteUser01" parameterType="user">
+	DELETE FROM USERS
+	<trim prefix="WHERE">
+		USER_ID = #{id}
+	</trim>
+	</delete>
+	
+</mapper>
