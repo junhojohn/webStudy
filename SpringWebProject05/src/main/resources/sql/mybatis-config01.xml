@@ -72,6 +72,7 @@
 		<mapper resource="sql/userMapper07.xml"/>
 		<mapper resource="sql/userMapper08.xml"/>
 		<mapper resource="sql/userMapper09.xml"/>
+		<mapper resource="sql/userMapper10.xml"/>
 	</mappers>
 	
 </configuration>

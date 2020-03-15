@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="userMapper10">
+	
+	<resultMap type="mybatis.service.domain.User" id="userSelectMap">
+		<result property="id" column="USER_ID" jdbcType="VARCHAR"/>
+		<result property="name" column="USER_NAME" jdbcType="VARCHAR"/>
+		<result property="pwd" column="PASSWORD" jdbcType="VARCHAR"/>
+		<result property="age" column="AGE" jdbcType="INTEGER"/>
+		<result property="grade" column="GRADE" jdbcType="NUMERIC"/>
+		<result property="regDate" column="REG_DATE" jdbcType="DATE"/>
+	</resultMap>
+	
+	<sql id="select-users">
+	SELECT 
+	USER_ID		AS id,
+	USER_NAME	AS name,
+	PASSWORD	AS pwd,
+	AGE			AS age,
+	GRADE		AS grade,
+	REG_DATE	AS regDate
+	FROM USERS
+	</sql>
+	
+	<sql id="order-by-userId-desc">
+	ORDER BY USER_ID DESC
+	</sql>
+
+	<insert id="addUser" parameterType="user">
+	INSERT INTO
+	USERS(USER_ID, USER_NAME, PASSWORD, AGE, GRADE, REG_DATE)
+	VALUES(#{id}, #{name}, #{pwd}, #{age}, #{grade}, #{regDate:DATE})
+	</insert>	
+	
+	<select id="getUser" parameterType="string" resultMap="userSelectMap">
+		<include refid="select-users"/>
+		<where>
+			USER_ID = #{value}
+		</where>
+	</select>
+	
+	<update id="updateUser" parameterType="user">
+	UPDATE USERS
+	<set>
+		<if test="name != null">
+			USER_NAME = #{name},
+		</if>
+		<if test="pwd != null">
+			PASSWORD = #{pwd},
+		</if>
+		AGE = #{age},
+		GRADE = #{grade}
+	</set>
+	<where>
+		<if test="id != null">
+			USER_ID = #{id}
+		</if>
+	</where>
+	</update>
+	
+	<delete id="deleteUser" parameterType="string">
+	DELETE FROM USERS
+	<where>
+		USER_ID = #{id}
+	</where>
+	</delete>
+	
+	<select id="getUserList" parameterType="mybatis.service.domain.Search" resultMap="userSelectMap">
+		<include refid="select-users"/>
+		<trim prefix="WHERE">
+			<choose>
+				<when test="searchCondition == 'idList'">
+					<if test="idList.size() != 0">
+						USER_ID IN
+						<foreach item="value" collection="idList" open="(" separator="," close=")">
+							#{value}
+						</foreach>
+					</if>
+				</when>		
+				<when test="searchCondition == 'nameList'">
+					<if test="nameList[0] != null">
+						USER_NAME IN
+						<foreach item="value" collection="nameList" open="(" separator="," close=")">
+							#{value}
+						</foreach>
+					</if>
+				</when>	
+			</choose>
+		</trim>
+		<include refid="order-by-userId-desc"/>
+	</select>
+</mapper>        
