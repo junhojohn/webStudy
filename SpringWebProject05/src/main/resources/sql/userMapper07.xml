@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="userMapper07">
+	
+	<!-- SELECT 매핑구문에서 사용할 ResultSet과 바인딩될 비즈니스 객체 명시적 정의 -->	
+	<resultMap type="mybatis.service.domain.User" id="userSelectMap">
+		<result property="id" column="USER_ID" jdbcType="VARCHAR"/>
+		<result property="name" column="USER_NAME" jdbcType="VARCHAR"/>
+		<result property="pwd" column="PASSWORD" jdbcType="VARCHAR"/>
+		<result property="age" column="AGE" jdbcType="INTEGER"/>
+		<result property="grade" column="GRADE" jdbcType="NUMERIC"/>
+		<result property="regDate" column="REG_DATE" jdbcType="DATE"/>
+	</resultMap>
+	
+	<!-- 
+	Dynamic SQL :: <where> element는 <trim> element로 변경 가능
+	 -->
+	<select id="selectUser01" parameterType="user" resultMap="userSelectMap">
+	SELECT
+	USER_ID		AS id,
+	USER_NAME	AS name,
+	PASSWORD	AS pwd,
+	AGE			AS age,
+	GRADE		AS grade,
+	REG_DATE	AS regDate
+	FROM USERS
+	<where>
+		<if test="id != null">
+			USER_ID = #{id}
+		</if>
+		<if test="name != null">
+			AND USER_NAME =#{name}
+		</if>
+	</where>
+	ORDER BY USER_ID DESC
+	</select>
+
+	<!-- 
+	Dynamic SQL :: <where> element는 <trim> element로 변경 가능
+	 -->	
+	<select id="selectUser02" parameterType="user" resultMap="userSelectMap">
+	SELECT 
+	USER_ID 	AS id,
+	USER_NAME	AS name,
+	PASSWORD	AS pwd,
+	AGE			AS age,
+	GRADE		AS grade,
+	REG_DATE	AS regDate
+	FROM USERS
+	<trim prefix="WHERE" prefixOverrides="AND | OR">
+		<if test="id != null">
+			USER_ID = #{id}
+		</if>
+		<if test="name != null">
+			AND USER_NAME = #{name}
+		</if>
+	</trim>
+	ORDER BY USER_ID DESC
+	</select>
+	
+	
+	<select id="selectUserList01" resultMap="userSelectMap">
+	SELECT
+	USER_ID		AS id,
+	USER_NAME	AS name,
+	PASSWORD	AS pwd,
+	AGE			AS age,
+	GRADE		AS grade,
+	REG_DATE	AS regDate
+	FROM USERS
+	</select>
+	
+	<!-- INSERT 매핑구문(INSERT SQL 등록) :: INSERT ELEMENT -->
+	<insert id="addUser01" parameterType="user">
+	INSERT INTO 
+	USERS(USER_ID, USER_NAME, PASSWORD, AGE, GRADE, REG_DATE)
+	VALUES(#{id}, #{name}, #{pwd}, #{age}, #{grade}, #{regDate:DATE})
+	</insert>
+	
+	<!-- DELETE 매핑구문(DELETE SQL 등록) :: DELETE ELEMENT -->
+	<delete id="deleteUser01" parameterType="user">
+	DELETE FROM USERS
+	<where>
+		<if test="id != null">
+			USER_ID = #{id}
+		</if>
+	</where>
+	</delete>
+</mapper>
