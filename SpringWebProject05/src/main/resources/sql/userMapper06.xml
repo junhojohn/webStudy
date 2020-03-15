@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- userMapper06.xml:: SQL을 갖는 MetaData -->        
+<mapper namespace="userMapper06">
+	
+	<!-- SELECT 매핑구문에서 사용할 ResultSet과 바인딩될 비즈니스 객체의 명시적 정의 -->
+	<resultMap type="mybatis.service.domain.User" id="userSelectMap">
+		<result property="id" column="USER_ID" jdbcType="VARCHAR"/>
+		<result property="name" column="USER_NAME" jdbcType="VARCHAR"/>
+		<result property="pwd" column="PASSWORD" jdbcType="VARCHAR"/>
+		<result property="age" column="AGE" jdbcType="INTEGER"/>
+		<result property="grade" column="GRADE" jdbcType="NUMERIC"/>
+		<result property="regDate" column="REG_DATE" jdbcType="DATE"/>
+	</resultMap>
+
+	<!-- 
+	1. 조건 WHERE USER_ID = #{id}
+	2. 다른 조건 WHERE USER_NAME = #{name}
+	3. 다른 조건 WHERE USER_ID = #{id} AND USER_NAME = #{name}
+	4. 조건이 없다면? 다양한 조건의 Query /<select>가 필요하다면?
+	 -->	
+	<select id="selectUser01" parameterType="user" resultMap="userSelectMap">
+	SELECT
+	USER_ID		AS id,
+	USER_NAME	AS name,
+	PASSWORD	AS pwd,
+	AGE			AS age,
+	GRADE		AS grade,
+	REG_DATE	AS regDate
+	FROM USERS
+	WHERE USER_ID = #{id}
+	</select>
+
+	<!-- 
+	Dynamic SQL::
+	 - 다양한 조건의 Query 필요한 경우 SQL 구문이 기하급수적으로 늘어남
+	 - 동적 SQL을 사용하여 매핑 구문을 재사용하여, 정적 SQL 다수 작성을 피한다.
+	 -->	
+	<select id="selectUserList01" parameterType="user" resultMap="userSelectMap">
+	SELECT
+	USER_ID		AS id,
+	USER_NAME	AS name,
+	PASSWORD	AS pwd,	
+	AGE			AS age,
+	GRADE		AS grade,
+	REG_DATE	AS regDate
+	FROM USERS
+	<!-- 
+	WHERE ELEMENT::
+	 - Contents 추가되면 WHERE 추가 ,Contents가 없으면 무시
+	 - SQL 구성 시 WHERE 다음 Contents가 AND/OR로 시작하면 무시
+	 -->
+	<where>
+		<if test="name != null">
+		USER_NAME = #{name}
+		</if>
+		<if test="pwd != null">
+		AND PASSWORD = #{pwd}
+		</if>
+	</where>
+	ORDER BY USER_ID DESC
+	</select>
+	
+	<!-- 
+	Dynamic SELECT 매핑구문(SELECT SQL 등록) :: SELECT ELEMENT
+	 -->
+	<select id="selectUserList02" parameterType="user" resultMap="userSelectMap">
+	SELECT 
+	USER_ID 	AS id,
+	USER_NAME	AS name,
+	PASSWORD	AS pwd,
+	AGE			AS age,
+	GRADE		AS grade,
+	REG_DATE	AS regDate
+	FROM USERS
+	<where>
+		<if test="id != null">
+			USER_ID = #{id}
+		</if>
+		<if test="name != null">
+			OR USER_NAME =#{name}
+		</if>
+		<if test="pwd != null">
+			OR PASSWORD = #{pwd}
+		</if>
+	</where>
+	ORDER BY USER_ID DESC
+	</select>
+	
+	<!-- 
+	INSERT 매핑구문(INSERT SQL 등록) :: INSERT ELEMENT
+	 -->
+	<insert id="addUser01" parameterType="user">
+	INSERT INTO
+	USERS(USER_ID, USER_NAME, PASSWORD, AGE, GRADE, REG_DATE)
+	VALUES(#{id}, #{name}, #{pwd}, #{age:INTEGER}, #{grade}, #{regDate:DATE})
+	</insert>
+	
+	<!-- 
+	DELETE 매핑구문(DELETE SQL 등록) :: DELETE ELEMENT
+	 -->
+	<delete id="deleteUser01" parameterType="user">
+	DELETE FROM USERS
+	<where>
+		<if test="id != null">
+			USER_ID=#{id} 
+		</if>
+		<if test="pwd != null">
+			AND PASSWORD=#{pwd}
+		</if>
+	</where>
+	</delete>
+</mapper>
