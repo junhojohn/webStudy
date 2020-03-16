@@ -19,7 +19,7 @@ public class MyBatisTestApp13 {
 	public static void main(String[] args) throws Exception{
 
 		ApplicationContext context =
-			new ClassPathXmlApplicationContext(	new String[] {	"/config/commonService.xml", "/config/userService.xml" });
+			new ClassPathXmlApplicationContext(	new String[] {	"/config/commonService13.xml", "/config/userService13.xml" });
 		System.out.println("\n");
 
 		//==> Bean/IoC Container 로 부터 획득한 UserService 인스턴스 획득
