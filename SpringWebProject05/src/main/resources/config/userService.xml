@@ -4,14 +4,11 @@
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://www.springframework.org/schema/beans 
 												 http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-	<bean id="sqlSessionTemplate" class="
-org.apache.ibatis.session.SqlSession"/>
-	
 	
 	<bean id="userDaoImpl" class="mybatis.service.daos.UserDaoImpl">
-		<property name="sqlSession" ref="sqlSessionTemplate"/>		
-	</bean>				 
-	<bean id="userServiceImpl" class="mybatis.service.services.UserServiceImpl" >
+		<property name="sqlSession" ref="sqlSessionTemplate"></property>
+	</bean>				
+	<bean id="userServiceImpl" class="mybatis.service.services.UserServiceImpl">
 		<property name="userDao" ref="userDaoImpl"/>
 	</bean>
 </beans>
