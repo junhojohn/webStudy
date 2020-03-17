@@ -8,8 +8,8 @@ package com.junhojohn.consts;
 public enum DB_CONNECTION_INFO_ENUM {
 
 	ORACLE_DB_URL("ORACLE_DB_URL", "jdbc:oracle:thin:@127.0.0.1:1521:junhojohn"),
-	ORACLE_DB_ID("ORACLE_DB_ID", "SYSTEM"),
-	ORACLE_DB_PWD("ORACLE_DB_PWD", "Wnsgh3535"),
+	ORACLE_DB_ID("ORACLE_DB_ID", "ibatis"),
+	ORACLE_DB_PWD("ORACLE_DB_PWD", "ibatis"),
 	ORACLE_DB_DRIVER("ORACLE_DB_DRIVER", "oracle.jdbc.driver.OracleDriver");
 	
 	private String key;
