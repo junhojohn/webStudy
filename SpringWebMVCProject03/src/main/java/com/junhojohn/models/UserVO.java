@@ -10,6 +10,7 @@ public class UserVO {
 	private int age;
 	private int grade;
 	private Timestamp regDate;
+	private boolean isActive;
 	
 	public UserVO() {
 		// TODO Auto-generated constructor stub
@@ -79,10 +80,18 @@ public class UserVO {
 		this.regDate = regDate;
 	}
 
+	public final boolean isActive() {
+		return isActive;
+	}
+
+	public final void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+
 	@Override
 	public String toString() {
 		return "UserVO [id=" + id + ", name=" + name + ", pwd=" + pwd + ", age=" + age + ", grade=" + grade
-				+ ", regDate=" + regDate + "]";
+				+ ", regDate=" + regDate + ", isActive=" + isActive + "]";
 	}
 
 }

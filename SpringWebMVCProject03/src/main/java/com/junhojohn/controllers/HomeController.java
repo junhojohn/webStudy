@@ -1,15 +1,16 @@
 package com.junhojohn.controllers;
 
-import java.sql.SQLException;
+import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.junhojohn.daos.UserDao;
-import com.junhojohn.daos.UserDaoImpl;
+import com.junhojohn.consts.Const;
+import com.junhojohn.consts.REQ_ACTION_PAGES_ENUM;
 import com.junhojohn.models.UserVO;
-import com.junhojohn.services.UserService;
-import com.junhojohn.services.UserServiceImpl;
 
 public class HomeController implements Controller {
 
@@ -17,17 +18,22 @@ public class HomeController implements Controller {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void execute(HttpServletRequest request, HttpServletResponse response) {
+	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println(getClass().getName() + ".execute() start.");
 		
-		UserDao userDao = new UserDaoImpl();
-		UserService userService = new UserServiceImpl(userDao);
-		try {
-			UserVO user = userService.getUser("ibatis01");
-			System.out.println(user.toString());
-		} catch (SQLException e) {
-			e.printStackTrace();
+		HttpSession session = request.getSession(true);
+		if(session.isNew() || session.getAttribute(Const.SESSION_ATTR_KEY_USER_VO) == null) {
+			session.setAttribute(Const.SESSION_ATTR_KEY_USER_VO, new UserVO());
 		}
+		
+		UserVO userVO = (UserVO) session.getAttribute(Const.SESSION_ATTR_KEY_USER_VO);
+		String actionPage = REQ_ACTION_PAGES_ENUM.REQ_LOGON.getJspPathURI();
+		if(userVO.isActive()) {
+			actionPage = REQ_ACTION_PAGES_ENUM.REQ_HOME.getJspPathURI();
+		}
+		
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(actionPage);
+		requestDispatcher.forward(request, response);
 	}
 
 }

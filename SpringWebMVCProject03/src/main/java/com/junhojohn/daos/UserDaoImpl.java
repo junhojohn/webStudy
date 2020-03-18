@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.junhojohn.consts.DB_CONNECTION_INFO_ENUM;
 import com.junhojohn.models.UserVO;
+import com.junhojohn.utils.DBUtil;
 
 public class UserDaoImpl implements UserDao {
 
@@ -32,59 +33,34 @@ public class UserDaoImpl implements UserDao {
 //	}
 	
 	public UserVO selectUserVO(final String id) {
-		UserVO newUserVO 					= null; 
+		UserVO newUserVO 					= new UserVO();
 		ResultSet resultSet 				= null;
 		Connection connection 				= null;
 		PreparedStatement preparedStatement = null;
 		
 		try {
-			Class.forName(DB_CONNECTION_INFO_ENUM.ORACLE_DB_DRIVER.getValue());
-			connection 			= DriverManager.getConnection(DB_CONNECTION_INFO_ENUM.ORACLE_DB_URL.getValue(), 
-																DB_CONNECTION_INFO_ENUM.ORACLE_DB_ID.getValue(), 
-																DB_CONNECTION_INFO_ENUM.ORACLE_DB_PWD.getValue());
-		
+			connection = DBUtil.getConnection();
 			preparedStatement 	= connection.prepareStatement("SELECT USER_ID, USER_NAME, PASSWORD, AGE, GRADE, REG_DATE FROM USERS WHERE USER_ID = ?");
 			preparedStatement.setString(1, id);
 			resultSet 			= preparedStatement.executeQuery();
 			if(resultSet.next()) {
-				newUserVO = new UserVO();
 				newUserVO.setId(resultSet.getString(1));
 				newUserVO.setName(resultSet.getString(2));
 				newUserVO.setPwd(resultSet.getString(3));
 				newUserVO.setAge(resultSet.getInt(4));
 				newUserVO.setGrade(resultSet.getInt(5));
 				newUserVO.setRegDate(resultSet.getTimestamp(6));
+				newUserVO.setActive(true);
+			}else {
+				newUserVO.setActive(false);
 			}
 		
-			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if(resultSet != null) {
-				try {
-					resultSet.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				} finally {
-					if(preparedStatement != null) {
-						try {
-							preparedStatement.close();
-						} catch (SQLException e) {
-							e.printStackTrace();
-						} finally {
-							if(connection != null) {
-								try {
-									connection.close();
-								} catch (SQLException e) {
-									e.printStackTrace();
-								}
-							}
-						}
-					}
-				}
-			}
+			DBUtil.closeAllResources(resultSet, preparedStatement, connection);
 		}
 		
 		return newUserVO;

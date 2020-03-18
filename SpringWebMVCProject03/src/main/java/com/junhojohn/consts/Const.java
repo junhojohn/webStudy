@@ -11,4 +11,6 @@ public class Const {
 	public static final String SESSION_ATTR_KEY_USER_VO = "userVO";
 	public static final String REQ_PARAM_KEY_USER_ID = "userId";
 	public static final String REQ_PARAM_KEY_USER_PWD = "userPwd";
+	public static final String SLASH ="/";
+	public static final String REQ_URI_POSTFIX_DO = ".do";
 }
