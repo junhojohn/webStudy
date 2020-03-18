@@ -1,4 +1,4 @@
-package com.junhojohn.controllers.mappers;
+package com.junhojohn.mappings;
 
 import javax.servlet.http.HttpServletRequest;
 

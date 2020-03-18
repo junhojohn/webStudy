@@ -7,7 +7,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.junhojohn.models.CustomModelAndView;
+
 public interface Controller {
 
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
+	public CustomModelAndView execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
 }

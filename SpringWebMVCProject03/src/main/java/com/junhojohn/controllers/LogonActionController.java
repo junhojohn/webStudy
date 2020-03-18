@@ -14,6 +14,7 @@ import com.junhojohn.consts.Const;
 import com.junhojohn.consts.REQ_ACTION_PAGES_ENUM;
 import com.junhojohn.daos.UserDao;
 import com.junhojohn.daos.UserDaoImpl;
+import com.junhojohn.models.CustomModelAndView;
 import com.junhojohn.models.UserVO;
 import com.junhojohn.services.UserService;
 import com.junhojohn.services.UserServiceImpl;
@@ -24,7 +25,7 @@ public class LogonActionController implements Controller {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
+	public CustomModelAndView execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
 		System.out.println(getClass().getName() + ".execute() start.");
 		
 		UserVO loggedOnuserVO 	= null;
@@ -58,10 +59,12 @@ public class LogonActionController implements Controller {
 			}
 		}
 		
-
-		ServletContext servletContext = request.getServletContext();
-		RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(actionPage);
-		requestDispatcher.forward(request, response);
+//		ServletContext servletContext = request.getServletContext();
+//		RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(actionPage);
+//		requestDispatcher.forward(request, response);
+		
+		System.out.println(getClass().getName() + ".execute() end.");		
+		return new CustomModelAndView(actionPage);
 
 	}
 
