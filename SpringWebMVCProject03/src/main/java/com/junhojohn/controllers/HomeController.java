@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import com.junhojohn.consts.Const;
 import com.junhojohn.consts.REQ_ACTION_PAGES_ENUM;
+import com.junhojohn.models.CustomModelAndView;
 import com.junhojohn.models.UserVO;
 
 public class HomeController implements Controller {
@@ -18,7 +19,7 @@ public class HomeController implements Controller {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public CustomModelAndView execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println(getClass().getName() + ".execute() start.");
 		
 		HttpSession session = request.getSession(true);
@@ -32,8 +33,13 @@ public class HomeController implements Controller {
 			actionPage = REQ_ACTION_PAGES_ENUM.REQ_HOME.getJspPathURI();
 		}
 		
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher(actionPage);
-		requestDispatcher.forward(request, response);
+//		ServletContext servletContext = request.getServletContext();
+//		RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(actionPage);
+//		requestDispatcher.forward(request, response);
+		
+		System.out.println(getClass().getName() + ".execute() end.");		
+		return new CustomModelAndView(actionPage);
+
 	}
 
 }
