@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="userMapper">
+	<resultMap type="com.junhojohn.core.models.UserVO" id="userSelectMap">
+		<result property="id" column="USER_ID" jdbcType="VARCHAR"/>
+		<result property="name" column="USER_NAME" jdbcType="VARCHAR"/>
+		<result property="password" column="PASSWORD" jdbcType="VARCHAR"/>
+		<result property="age" column="AGE" jdbcType="INTEGER"/>
+		<result property="grade" column="GRADE" jdbcType="NUMERIC"/>
+		<result property="regDate" column="REG_DATE" jdbcType="DATE"/>
+	</resultMap>
+	
+	<sql id="select-users">
+	SELECT 
+	USER_ID		AS id,
+	USER_NAME	AS name,
+	PASSWORD	AS pwd,
+	AGE			AS age,
+	GRADE		AS grade
+	FROM USERS
+	</sql>
+	
+	<sql id="order-by-userId-desc">
+	ORDER BY USER_ID DESC
+	</sql>
+	
+	<select id="selectAllUserList" resultMap="userSelectMap">
+		<include refid="select-users"/>
+		<include refid="order-by-userId-desc"/>
+	</select>
+	
+	<select id="selectUser" parameterType="string" resultMap="userSelectMap">
+		<include refid="select-users"/>
+		<where>
+			USER_ID = #{value}
+		</where>
+		<include refid="order-by-userId-desc"/>
+	</select>
+	
+	<insert id="insertUser" parameterType="userVO">
+	INSERT INTO
+	USERS(USER_ID, USER_NAME, PASSWORD, AGE, GRADE, REG_DATE)
+	VALUES(#{id}, #{name}, #{pwd}, #{age}, #{grade}, #{regDate:DATE})
+	</insert>
+	
+	<delete id="deleteUser" parameterType="string">
+	DELETE FROM USERS
+	<where>
+		USER_ID = #{value}
+	</where>
+	</delete>
+	
+	<update id="updateUser" parameterType="userVO">
+	UPDATE USERS
+	<set>
+		<if test="name != null">
+			USER_NAME = #{name},
+		</if>
+		<if test="pwd != null">
+			PASSWORD = #{pwd},
+		</if>
+		AGE = #{age},
+		GRADE = #{grade}
+	</set>
+	<where>
+		USER_ID = #{id}
+	</where>
+	</update>
+</mapper>
