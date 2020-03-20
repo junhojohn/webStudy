@@ -34,9 +34,7 @@ public class DispatcherServlet extends HttpServlet {
 		System.out.println("action page:" + actionPage);
 		Controller controller = ControllerMapping.getController(request);
 		CustomModelAndView modelAndView = controller.execute(request, response);
-		ServletContext servletContext = request.getServletContext();
-		RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(modelAndView.getViewName());
-		requestDispatcher.forward(request, response);
+		new CustomViewResolver().forward(request, response, modelAndView);
 		
 		System.out.println(getClass().getName() + ".service() end.");
 	}
