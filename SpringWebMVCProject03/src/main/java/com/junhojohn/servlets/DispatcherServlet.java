@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.junhojohn.consts.Const;
 import com.junhojohn.controllers.Controller;
 import com.junhojohn.mappings.ControllerMapping;
-import com.junhojohn.mappings.CustomViewResolver;
 import com.junhojohn.models.CustomModelAndView;
 import com.junhojohn.utils.LocationUtil;
 
@@ -34,7 +33,6 @@ public class DispatcherServlet extends HttpServlet {
 		System.out.println("action page:" + actionPage);
 		Controller controller = ControllerMapping.getController(request);
 		CustomModelAndView modelAndView = controller.execute(request, response);
-		new CustomViewResolver().forward(request, response, modelAndView);
 		
 		System.out.println(getClass().getName() + ".service() end.");
 	}
