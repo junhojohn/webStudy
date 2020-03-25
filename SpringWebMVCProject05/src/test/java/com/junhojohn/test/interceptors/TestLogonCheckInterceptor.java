@@ -38,7 +38,7 @@ public class TestLogonCheckInterceptor extends HandlerInterceptorAdapter {
 			if(actionPage.equals(REQ_ACTION_PAGES_ENUM_TEST.REQ_LOGON.getRequestActionKey()) 	||
 				actionPage.equals(REQ_ACTION_PAGES_ENUM_TEST.REQ_HOME.getRequestActionKey()) 	||
 				actionPage.equals(REQ_ACTION_PAGES_ENUM_TEST.REQ_LOGOUT.getRequestActionKey())) {
-				if(true) {
+				if(userVO.isActive()) {
 					System.out.println("You've already logged on!!!");
 					request.getServletContext().getRequestDispatcher(REQ_ACTION_PAGES_ENUM_TEST.REQ_HOME.getJspPathURI()).forward(request, response);
 					System.out.println(getClass().getName() + ".preHandle() end.");
