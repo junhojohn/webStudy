@@ -16,7 +16,7 @@ import com.junhojohn.models.UserVO;
 import com.junhojohn.service.UserService;
 import com.junhojohn.service.impl.UserServiceImpl;
 
-@Controller
+//@Controller
 public class User003Controller {
 
 	@RequestMapping("/logon.do")

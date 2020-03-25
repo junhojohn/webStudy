@@ -5,25 +5,25 @@ package com.junhojohn.consts;
  * @author junhojohn
  *
  */
-public enum REQ_ACTION_PAGES_ENUM_002 {
+public enum REQ_ACTION_PAGES_ENUM_004 {
 
-	REQ_HOME		("home", 		"/002views/home.jsp", 			"/SpringWebMVCProject04/home.do"),
-	REQ_LOGON		("logon", 		"/002views/logon.jsp", 			"/SpringWebMVCProject04/logon.do"),
-	REQ_LOGOUT		("logout", 		"/002views/logout.jsp", 		"/SpringWebMVCProject04/logout.do"),
+	REQ_HOME		("home", 		"/004views/home.jsp", 			"/SpringWebMVCProject04/home.do"),
+	REQ_LOGON		("logon", 		"/004views/logon.jsp", 			"/SpringWebMVCProject04/logon.do"),
+	REQ_LOGOUT		("logout", 		"/004views/logout.jsp", 		"/SpringWebMVCProject04/logout.do"),
 	REQ_LOGON_ACTION("logonAction", "", 							"/SpringWebMVCProject04/logonAction.do");
 	
 	private String requestActionKey;
 	private String jspPathURI;
 	private String requestURI;
 	
-	private REQ_ACTION_PAGES_ENUM_002(String requestActionKey, String jspPathURI, String requestURI) {
+	private REQ_ACTION_PAGES_ENUM_004(String requestActionKey, String jspPathURI, String requestURI) {
 		this.requestActionKey	= requestActionKey;
 		this.jspPathURI			= jspPathURI;
 		this.requestURI			= requestURI;
 	}
 
 	public static String getRequestActionKeyByJSPPathURI(String jspPathURI) {
-		for(REQ_ACTION_PAGES_ENUM_002 actionKind : REQ_ACTION_PAGES_ENUM_002.values()) {
+		for(REQ_ACTION_PAGES_ENUM_004 actionKind : REQ_ACTION_PAGES_ENUM_004.values()) {
 			if(actionKind.getJspPathURI().equals(jspPathURI)) {
 				return actionKind.getRequestActionKey();
 			}
@@ -32,7 +32,7 @@ public enum REQ_ACTION_PAGES_ENUM_002 {
 	}
 	
 	public static String getRequestActionKeyByRequestURI(String requestURI) {
-		for(REQ_ACTION_PAGES_ENUM_002 actionKind : REQ_ACTION_PAGES_ENUM_002.values()) {
+		for(REQ_ACTION_PAGES_ENUM_004 actionKind : REQ_ACTION_PAGES_ENUM_004.values()) {
 			if(actionKind.getRequestURI().equals(requestURI)) {
 				return actionKind.getRequestActionKey();
 			}
@@ -41,7 +41,7 @@ public enum REQ_ACTION_PAGES_ENUM_002 {
 	}
 	
 	public static String getJSPPathByRequestActionKey(String requestActionKey) {
-		for(REQ_ACTION_PAGES_ENUM_002 actionKind : REQ_ACTION_PAGES_ENUM_002.values()) {
+		for(REQ_ACTION_PAGES_ENUM_004 actionKind : REQ_ACTION_PAGES_ENUM_004.values()) {
 			if(actionKind.getRequestActionKey().equals(requestActionKey)) {
 				return actionKind.getJspPathURI();
 			}
@@ -50,7 +50,7 @@ public enum REQ_ACTION_PAGES_ENUM_002 {
 	}
 	
 	public static String getJSPPathByRequestURI(String requestURI) {
-		for(REQ_ACTION_PAGES_ENUM_002 actionKind : REQ_ACTION_PAGES_ENUM_002.values()) {
+		for(REQ_ACTION_PAGES_ENUM_004 actionKind : REQ_ACTION_PAGES_ENUM_004.values()) {
 			if(actionKind.getRequestURI().equals(requestURI)) {
 				return actionKind.getJspPathURI();
 			}
@@ -59,7 +59,7 @@ public enum REQ_ACTION_PAGES_ENUM_002 {
 	}
 	
 	public static String getRequestURIByRequestActionKey(String requestActionKey) {
-		for(REQ_ACTION_PAGES_ENUM_002 actionKind : REQ_ACTION_PAGES_ENUM_002.values()) {
+		for(REQ_ACTION_PAGES_ENUM_004 actionKind : REQ_ACTION_PAGES_ENUM_004.values()) {
 			if(actionKind.getRequestActionKey().equals(requestActionKey)) {
 				return actionKind.getRequestURI();
 			}
@@ -68,7 +68,7 @@ public enum REQ_ACTION_PAGES_ENUM_002 {
 	}
 	
 	public static String getRequestURIByJSPPathURI(String jspPathURI) {
-		for(REQ_ACTION_PAGES_ENUM_002 actionKind : REQ_ACTION_PAGES_ENUM_002.values()) {
+		for(REQ_ACTION_PAGES_ENUM_004 actionKind : REQ_ACTION_PAGES_ENUM_004.values()) {
 			if(actionKind.getJspPathURI().equals(jspPathURI)) {
 				return actionKind.getRequestURI();
 			}
@@ -76,8 +76,8 @@ public enum REQ_ACTION_PAGES_ENUM_002 {
 		return null;
 	}
 	
-	public static REQ_ACTION_PAGES_ENUM_002 getKindByRequestActionKey(String requestActionKey) {
-		for(REQ_ACTION_PAGES_ENUM_002 actionKind : REQ_ACTION_PAGES_ENUM_002.values()) {
+	public static REQ_ACTION_PAGES_ENUM_004 getKindByRequestActionKey(String requestActionKey) {
+		for(REQ_ACTION_PAGES_ENUM_004 actionKind : REQ_ACTION_PAGES_ENUM_004.values()) {
 			if(actionKind.getRequestActionKey().equals(requestActionKey)) {
 				return actionKind;
 			}
@@ -85,8 +85,8 @@ public enum REQ_ACTION_PAGES_ENUM_002 {
 		return null;		
 	}
 	
-	public static REQ_ACTION_PAGES_ENUM_002 getKindByJSPPathURI(String jspPathURI) {
-		for(REQ_ACTION_PAGES_ENUM_002 actionKind : REQ_ACTION_PAGES_ENUM_002.values()) {
+	public static REQ_ACTION_PAGES_ENUM_004 getKindByJSPPathURI(String jspPathURI) {
+		for(REQ_ACTION_PAGES_ENUM_004 actionKind : REQ_ACTION_PAGES_ENUM_004.values()) {
 			if(actionKind.getJspPathURI().equals(jspPathURI)) {
 				return actionKind;
 			}
@@ -94,8 +94,8 @@ public enum REQ_ACTION_PAGES_ENUM_002 {
 		return null;		
 	}
 	
-	public static REQ_ACTION_PAGES_ENUM_002 getKindByRequestURI(String requestURI) {
-		for(REQ_ACTION_PAGES_ENUM_002 actionKind : REQ_ACTION_PAGES_ENUM_002.values()) {
+	public static REQ_ACTION_PAGES_ENUM_004 getKindByRequestURI(String requestURI) {
+		for(REQ_ACTION_PAGES_ENUM_004 actionKind : REQ_ACTION_PAGES_ENUM_004.values()) {
 			if(actionKind.getRequestURI().equals(requestURI)) {
 				return actionKind;
 			}

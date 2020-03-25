@@ -9,7 +9,7 @@ public enum REQ_ACTION_PAGES_ENUM_003 {
 
 	REQ_HOME		("home", 		"/003views/home.jsp", 			"/SpringWebMVCProject04/home.do"),
 	REQ_LOGON		("logon", 		"/003views/logon.jsp", 			"/SpringWebMVCProject04/logon.do"),
-	REQ_LOGOUT		("logout", 		"", 							"/SpringWebMVCProject04/logout.do"),
+	REQ_LOGOUT		("logout", 		"/003views/logout.jsp", 		"/SpringWebMVCProject04/logout.do"),
 	REQ_LOGON_ACTION("logonAction", "", 							"/SpringWebMVCProject04/logonAction.do");
 	
 	private String requestActionKey;
