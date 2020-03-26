@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.junhojohn.consts.Const;
-import com.junhojohn.consts.REQ_ACTION_PAGES_ENUM_001;
+import com.junhojohn.consts.REQ_ACTION_PAGES_ENUM_005;
 import com.junhojohn.models.UserVO;
 import com.junhojohn.utils.LocationUtil;
 
@@ -21,43 +21,46 @@ public class LogonCheckInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		System.out.println(getClass().getName() + ".preHandle() start.");
-		
-		HttpSession session = request.getSession(true);
+	
 		String requestURI 	= request.getRequestURI();
 		String actionPage 	= LocationUtil.getActionPage(requestURI);
 		
-		//세션체크
+		HttpSession session = request.getSession(true);
+		
 		if(session.isNew() || session.getAttribute(Const.SESSION_ATTR_KEY_USER_VO) == null) {
 			session.setAttribute(Const.SESSION_ATTR_KEY_USER_VO, new UserVO());
 		}
+
 		
 		UserVO userVO = (UserVO)session.getAttribute(Const.SESSION_ATTR_KEY_USER_VO);
-		
 		if(actionPage != null) {
-			if(actionPage.equals(REQ_ACTION_PAGES_ENUM_001.REQ_LOGON.getRequestActionKey()) 	||
-				actionPage.equals(REQ_ACTION_PAGES_ENUM_001.REQ_HOME.getRequestActionKey()) 	||
-				actionPage.equals(REQ_ACTION_PAGES_ENUM_001.REQ_LOGOUT.getRequestActionKey())) {
+			if(actionPage.equals(REQ_ACTION_PAGES_ENUM_005.REQ_HOME.getRequestActionKey()) 	||
+				actionPage.equals(REQ_ACTION_PAGES_ENUM_005.REQ_LOGOUT.getRequestActionKey())) {
+
 				if(userVO.isActive()) {
-					System.out.println("You've already logged on!!!");
-					request.getServletContext().getRequestDispatcher(REQ_ACTION_PAGES_ENUM_001.REQ_HOME.getJspPathURI()).forward(request, response);
+					// 로그인이 되어 있다면,
+					System.out.println("[로그인 상태... 로그인 후 불필요한 요구...");
+					request.getServletContext().getRequestDispatcher(REQ_ACTION_PAGES_ENUM_005.REQ_HOME.getJspPathURI()).forward(request, response);
 					System.out.println(getClass().getName() + ".preHandle() end.");
-					return true;					
+					return true;
 				}else {
-					System.out.println("Please logon first...");
-					request.getServletContext().getRequestDispatcher(REQ_ACTION_PAGES_ENUM_001.REQ_LOGON.getJspPathURI()).forward(request, response);
+					// 로그인이 되어 있지 않다면,
+					System.out.println("로그인 시도 상태...");
+					request.getServletContext().getRequestDispatcher(REQ_ACTION_PAGES_ENUM_005.REQ_LOGON.getJspPathURI()).forward(request, response);
 					System.out.println(getClass().getName() + ".preHandle() end.");
 					return false;
 				}
-
-			}else if(actionPage.equals(REQ_ACTION_PAGES_ENUM_001.REQ_LOGON_ACTION.getRequestActionKey())) {
-				System.out.println("Logon in progress...");
+				
+			}else if(actionPage.equals(REQ_ACTION_PAGES_ENUM_005.REQ_LOGON_ACTION.getRequestActionKey()) ||
+					actionPage.equals(REQ_ACTION_PAGES_ENUM_005.REQ_LOGON.getRequestActionKey())) {
+				System.out.println("로그인 시도 상태...");
 				System.out.println(getClass().getName() + ".preHandle() end.");
 				return true;
 			}
 		}
 		
 		System.out.println(getClass().getName() + ".preHandle() end.");
-		return false;
+		return true;
 	}
 	
 	

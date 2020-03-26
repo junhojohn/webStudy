@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.junhojohn.consts.Const;
-import com.junhojohn.consts.REQ_ACTION_PAGES_ENUM_001;
+import com.junhojohn.consts.REQ_ACTION_PAGES_ENUM_005;
 import com.junhojohn.models.UserVO;
 import com.junhojohn.test.consts.REQ_ACTION_PAGES_ENUM_TEST;
 import com.junhojohn.utils.LocationUtil;

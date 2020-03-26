@@ -53,6 +53,8 @@ public class UserDaoImpl implements UserDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
+		} finally {
+			DBUtil.closeAllResources(resultSet, preparedStatement, connection);
 		}
 		return userVO;
 	}
