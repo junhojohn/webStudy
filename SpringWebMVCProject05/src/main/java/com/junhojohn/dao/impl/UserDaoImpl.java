@@ -14,11 +14,11 @@ import com.junhojohn.dao.UserDao;
 import com.junhojohn.models.UserVO;
 import com.junhojohn.utils.DBUtil;
 
-@Repository
+@Repository("userDao")
 public class UserDaoImpl implements UserDao {
 
 	@Autowired
-	@Qualifier("sqlSession")
+	@Qualifier("sqlSessionTemplate")
 	private SqlSession sqlSession;
 	
 	public UserDaoImpl() {
@@ -30,9 +30,20 @@ public class UserDaoImpl implements UserDao {
 	}
 	
 	public UserVO selectUserVO(final String id) {
-		return null;
-//		sqlSession.select(arg0, arg1);
+		UserVO userVO = (UserVO)sqlSession.selectOne("userMapper.selectUserVO", id);
+		
+		if(userVO != null) {
+			userVO.setActive(true);			
+		}else {
+			userVO.setActive(false);
+		}
+
+		return userVO;
 		// TODO UNIT TEST
+	}
+
+	public void setSqlSession(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
 	}
 	
 //	public UserVO selectUserVO(final String id) {
@@ -69,8 +80,5 @@ public class UserDaoImpl implements UserDao {
 //		return null;
 //	}
 
-	public SqlSession getSqlSession() {
-		return sqlSession;
-	}
 	
 }

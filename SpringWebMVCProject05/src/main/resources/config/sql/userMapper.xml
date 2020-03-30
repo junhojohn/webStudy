@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		
+<mapper namespace="userMapper">
+	<resultMap id="userSelectMap" type="userVO">
+		<result property="userId" column="user_id" jdbcType="VARCHAR"/>
+		<result property="userName" column="user_name" jdbcType="VARCHAR" />
+		<result property="password" column="password" jdbcType="VARCHAR" />
+		<result property="age" column="age" jdbcType="INTEGER" />
+		<result property="grade" column="grade" jdbcType="NUMERIC"  />
+		<result property="regDate" column="reg_date" jdbcType="DATE" />
+	</resultMap>
+	
+	<sql id="select">
+	SELECT
+	USER_ID		AS id,
+	USER_NAME	AS name,
+	PASSWORD	AS pwd,
+	AGE			AS age,
+	GRADE		AS grade,
+	REG_DATE	AS regDate
+	FROM USERS
+	</sql>
+	
+	<sql id="order-by-userId-desc">
+	ORDER BY USER_ID DESC
+	</sql>
+	
+	<select id="selectUserVO" parameterType="string" resultMap="userSelectMap">
+		<include refid="select"/>
+		<where>
+			USER_ID = #{value}
+		</where>
+		<include refid="order-by-userId-desc"/>
+	</select>
+	
+</mapper>

@@ -1,4 +1,4 @@
-package com.junhojohn.test.consts;
+package com.test.junhojohn.consts;
 
 /**
  * Request Action에 대한 매핑 정보(request action, request uri)를 모아둔 enum 클래스

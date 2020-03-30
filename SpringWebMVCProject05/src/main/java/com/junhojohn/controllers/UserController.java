@@ -2,6 +2,8 @@ package com.junhojohn.controllers;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +21,10 @@ import com.junhojohn.service.impl.UserServiceImpl;
 @Controller
 public class UserController {
 
+	@Autowired
+	@Qualifier("userService")
+	private UserService userService;
+	
 	public UserController() {
 		System.out.println(getClass().getName() + "() Constructor.");
 	}
@@ -79,8 +85,8 @@ public class UserController {
 		System.out.println(getClass().getName() + ".logonAction() POST start.");
 		String viewName			= null;
 		String message			= null;
-		UserDao userDao 		= new UserDaoImpl();
-		UserService userService = new UserServiceImpl(userDao);
+//		UserDao userDao 		= new UserDaoImpl();
+//		UserService userService = new UserServiceImpl(userDao);
 		UserVO userVO 			= userService.getUserVO(id);
 		
 		if(userVO.isActive()) {
@@ -99,5 +105,34 @@ public class UserController {
 		System.out.println(getClass().getName() + ".logonAction() POST end.");
 		return modelAndView;
 	}
+	
+	
+//	@RequestMapping(value="logonAction.do", method=RequestMethod.POST)
+//	public ModelAndView logonAction(HttpSession session,
+//			@RequestParam(value=Const.REQ_PARAM_KEY_USER_ID, required=true) String id, 
+//			@RequestParam(value=Const.REQ_PARAM_KEY_USER_PWD, required=false) String pwd) {
+//		System.out.println(getClass().getName() + ".logonAction() POST start.");
+//		String viewName			= null;
+//		String message			= null;
+//		UserDao userDao 		= new UserDaoImpl();
+//		UserService userService = new UserServiceImpl(userDao);
+//		UserVO userVO 			= userService.getUserVO(id);
+//		
+//		if(userVO.isActive()) {
+//			viewName 	= REQ_ACTION_PAGES_ENUM_005.REQ_HOME.getJspPathURI();
+//			message		= "LogonAction!!! Welcome ";
+//			session.setAttribute(Const.SESSION_ATTR_KEY_USER_VO, userVO);
+//		}else {
+//			viewName 	= REQ_ACTION_PAGES_ENUM_005.REQ_LOGON.getJspPathURI();
+//			message		= "LogonAction... Fail to logon. Please check id or password.";
+//		}
+//		
+//		ModelAndView modelAndView = new ModelAndView();
+//		modelAndView.setViewName(viewName);
+//		modelAndView.addObject("message", message);
+//		
+//		System.out.println(getClass().getName() + ".logonAction() POST end.");
+//		return modelAndView;
+//	}
 
 }

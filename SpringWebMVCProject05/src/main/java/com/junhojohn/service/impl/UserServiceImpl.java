@@ -8,7 +8,7 @@ import com.junhojohn.dao.UserDao;
 import com.junhojohn.models.UserVO;
 import com.junhojohn.service.UserService;
 
-@Service
+@Service("userService")
 public class UserServiceImpl implements UserService {
 
 	@Autowired

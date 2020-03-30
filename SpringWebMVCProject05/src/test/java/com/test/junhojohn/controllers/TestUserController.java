@@ -1,4 +1,4 @@
-package com.junhojohn.test.controllers;
+package com.test.junhojohn.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.junhojohn.consts.Const;
-import com.junhojohn.test.consts.REQ_ACTION_PAGES_ENUM_TEST;
+import com.test.junhojohn.consts.REQ_ACTION_PAGES_ENUM_TEST;
 
 @Controller
 public class TestUserController {

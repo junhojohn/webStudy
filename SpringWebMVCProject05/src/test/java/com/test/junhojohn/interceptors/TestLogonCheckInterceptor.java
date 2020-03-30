@@ -1,4 +1,4 @@
-package com.junhojohn.test.interceptors;
+package com.test.junhojohn.interceptors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,8 +9,8 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import com.junhojohn.consts.Const;
 import com.junhojohn.consts.REQ_ACTION_PAGES_ENUM_005;
 import com.junhojohn.models.UserVO;
-import com.junhojohn.test.consts.REQ_ACTION_PAGES_ENUM_TEST;
 import com.junhojohn.utils.LocationUtil;
+import com.test.junhojohn.consts.REQ_ACTION_PAGES_ENUM_TEST;
 
 public class TestLogonCheckInterceptor extends HandlerInterceptorAdapter {
 

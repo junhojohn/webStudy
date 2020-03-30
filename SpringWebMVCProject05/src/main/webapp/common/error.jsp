@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR" isELIgnored="false"%>
 
 <html>
 	<body>
